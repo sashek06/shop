@@ -1,0 +1,89 @@
+@import 'css/bootstrap.min.css';
+
+/* body {
+  width: 100%;
+  font-family: Roboto,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #606060;
+  text-align: center;
+  padding-top:1%;
+}
+#main_table {
+  background: #FFFFFF;
+  padding:20px 10px;
+  border-radius:2px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top:9px;
+  width: 1200px;
+}
+th {
+  vertical-align: middle;
+  font-weight: 600;
+  font-size: 14px;
+  padding:8px;
+}
+td {
+  font-size: 14px;
+  text-align: left;
+  padding:7px;
+}
+a {
+  padding: 2px 2px;
+  text-decoration: none;
+  color: #666;
+  border-radius: 2px 2px 0 0;
+  margin:10px 0;
+}
+a:hover {
+  color: #2196f3;
+}
+a.active {
+  background: #fff;
+}
+label {
+  color: #fff;
+  display:block;
+  border-radius:2px;
+  font-size:75%;
+  padding:.2rem .55rem;
+  display: inline-block;
+}
+button {
+  background: #4caf50;
+  border: none;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+button:hover {
+  background: #397e3c;
+}
+.content {
+  vertical-align:top;
+  align:left;
+}
+.menu2 {
+  vertical-align:top;
+}
+table {
+	 background: #FFFFFF;
+}
+#cats_style{
+	font-family: Roboto,sans-serif;
+	font-size: 18px;
+	margin: 38px;
+	color: #666666;
+}
+#cats_style:hover {
+  color: #2196f3;
+}
+#cats_style .active {
+  background: #fff;
+} */
+p {
+  margin: 40 0 40;
+}
