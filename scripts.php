@@ -22,8 +22,10 @@ $(function() {
 		widgets: ["zebra", "filter"]
 	});//.tablesorterPager({container: $("#pager")}); ;
 	$('#departement').select2();
-	$('.datepicker_air').datepicker({		dateFormat: "yyyy.mm.dd",
-		timepicker: true	})
+	$('.datepicker_air').datepicker({
+		dateFormat: "yyyy.mm.dd",
+		timepicker: true
+	})
 });
 </script>
 
