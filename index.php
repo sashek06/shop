@@ -40,46 +40,17 @@
   </div>
 </nav>
 
-<table id="main_table" border="0">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-			
-		</td>
-	</tr>
-
-	<tr>
-		<!-- контент -->
-		<td width="900px" style="vertical-align:top;">
-
-<p>
-Стремитесь к вершинам в World of Warcraft, но не хватает времени и сил для прокачки персонажа? 
-</p>
-<p>
-Наш сайт по бустингу WoW поможет вам достичь желаемых результатов быстро и без лишних усилий! 
-</p>
-<p>
-Мы предлагаем профессиональные услуги по прокачке персонажей, выполнению рейдов и достижений, 
-а также продаже игровой валюты. Наши опытные игроки гарантируют безопасность и конфиденциальность ваших данных. 
-</p>
-<p>
-Заказывайте услуги бустинга WoW у нас и получайте удовольствие от игры, не теряя время на монотонную прокачку!
-</p>
-<img src="images/main.jpg" style="border-radius:5px">
-<p>
-<a href="about.php">Подробности</a>
-</p>
-<p>
-Спасибо за ваш выбор!
-</p>
-
-
-		</td>
-	</tr>
-</table>
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="images/lvlup.webp" alt="" width="200" height="200" style="border-radius: 30%;">
+    <h1 class="display-5 fw-bold text-body-emphasis">Эпичный прогресс</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Ускорьте прогресс в World of Warcraft с нашими бустинг-услугами! Легко достигайте целей как в PvE, так и в PvP. Безопасный и надежный сервис от профессионалов. Присоединяйтесь к тысячам довольных игроков и станьте сильнейшим в Азероте!</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Подробнее</button>
+<!--         <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button> -->
+      </div>
+    </div>
+  </div>
 
 <section class="footer">
 	<div class="container">
