@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container-fluid">
   <a class="navbar-brand" href="#">
       <img src="images/controller.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -25,32 +25,17 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
-	  <!-- <?php
-			include('menu.php');
-			include('showcase.php');
-		?> -->
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<?php
+				include('showcase.php');
+			?>
+		</ul>
+		<ul class="navbar-nav">
+			<?php
+				include('menu.php');
+			?>
+		</ul>
     </div>
   </div>
 </nav>
@@ -62,18 +47,11 @@
 			<?php
 				include('top.php');
 			?>
+			
 		</td>
 	</tr>
 
 	<tr>
-		<!-- меню -->
-		<td width="270px" class="menu" style="vertical-align:top;">
-			<?php
-				include('menu.php');
-				include('showcase.php');
-			?>
-		</td>
-
 		<!-- контент -->
 		<td width="900px" style="vertical-align:top;">
 
@@ -101,16 +79,6 @@
 
 		</td>
 	</tr>
-
-	<!-- подвал -->
-	<!-- <tr>
-		<td colspan=2 class="sticky-bottom">
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr> -->
-
 </table>
 
 <section class="footer">
