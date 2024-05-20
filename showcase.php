@@ -23,7 +23,7 @@ echo '
 <body class="d-flex flex-column h-100">
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="index.php">
       <img src="images/controller.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
       WoWBoost
     </a>

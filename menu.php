@@ -16,13 +16,13 @@ if (!isset($_SESSION['level'])) $menu .= '<li class="nav-item">
 	</li>';
 if (!isset($_SESSION['level'])) $menu .= '<li class="nav-item">
 	<a class="nav-link" href="reg.php">Регистрация</a>
-	</li>';
-else {
-	$menu .= '<li class="nav-item"><a class="nav-link disabled" href="#">' . $_SESSION['login'] . '</a></li>';
-	$menu .= '<li class="nav-item"><a class="nav-link" href="?do=exit">Выйти</a></li>';
-	$menu .= '<li class="nav-item"><a class="nav-link" href="cart.php"><div id="cart_info">Корзина</div></a></li>';
-	if (in_array($_SESSION['level'], array(2, 1))) $menu .= '<li class="nav-item><a class="nav-link" href="user_orders.php"><img src="images/order.png" height="18px">Заказы</a></li>';
-};
+	</li></ul></div></div></nav>';
+	else {
+		$menu.='<li class="nav-item"><a class="nav-link disabled" href="#">'.$_SESSION['login'].'</a></li>';
+		$menu.='<li class="nav-item"><a class="nav-link" href="?do=exit">Выйти</a></li>';
+		$menu.='<li class="nav-item"><a class="nav-link" href="cart.php"><div id="cart_info">Корзина</div></a></li>';
+		if ( in_array($_SESSION['level'], array(2,1)) ) $menu.='<li class="nav-item><a class="nav-link" href="user_orders.php"><img src="images/order.png" height="18px">Заказы</a></li>';
+	};
 /* 	else {
 		$menu.=$_SESSION['login'].' <a href="?do=exit" style="text-decoration:none; color:white">(выйти)</a>';
 		$menu.='<h2><a href="cart.php"><img src="images/cart2.svg" width="30px" height="24px"></a></h2>';

@@ -134,8 +134,6 @@ if (!in_array($_SESSION['level'], array(10, 2, 1))) { // доступ разре
 	do_order
 </script>
 
-<html data-bs-theme="dark">
-
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
@@ -147,46 +145,46 @@ if (!in_array($_SESSION['level'], array(10, 2, 1))) { // доступ разре
 	</script>
 </head>
 
+<html data-bs-theme="dark">
 <body>
-	<table id="main_table">
-		<!-- баннер -->
-		<tr>
-			<td colspan=2 style="text-align:center">
-				<?php
+<table id="main_table">
+	<!-- баннер -->
+	<tr>
+		<td colspan=2 style="text-align:center">
+			<?php
 				include('top.php');
-				?>
-			</td>
-		</tr>
+			?>
+		</td>
+	</tr>
 
-		<tr>
-			<!-- меню -->
-			<td width="300px" style="vertical-align:top">
-				<?php
+	<tr>
+		<!-- меню -->
+		<td width="300px" style="vertical-align:top">
+			<?php
 				include('menu.php');
 				include('showcase.php');
-				?>
-			</td>
+			?>
+		</td>
 
-			<!-- контент -->
-			<td style="vertical-align:top; width:900px">
+		<!-- контент -->
+		<td style="vertical-align:top; width:900px">
 
-				<h1><?php echo $title; ?></h1>
-				<div id="cart" width="100%"></div>
-				<button onclick="do_order()"><input type=image src="images/ok.gif">Оформить заказ</button>
-			</td>
-		</tr>
+<h1><?php echo $title;?></h1>
+		<div id="cart" width="100%"></div>
+		<button onclick="do_order()"><input type=image src="images/ok.gif">Оформить заказ</button>
+		</td>
+	</tr>
 
-		<!-- подвал -->
-		<tr>
-			<td colspan=2>
-				<?php
+	<!-- подвал -->
+	<tr>
+		<td colspan=2>
+			<?php
 				include('footer.php');
-				?>
-			</td>
-		</tr>
+			?>
+		</td>
+	</tr>
 
-	</table>
+</table>
 
 </body>
-
 </html>
