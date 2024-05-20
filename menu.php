@@ -16,7 +16,7 @@
 	</li>';
 	if ( !isset($_SESSION['level'])) $menu.='<li class="nav-item">
 	<a class="nav-link" href="reg.php">Регистрация</a>
-	</li>';
+	</li></ul></div></div></nav>';
 	else {
 		$menu.='<li class="nav-item"><a class="nav-link disabled" href="#">'.$_SESSION['login'].'</a></li>';
 		$menu.='<li class="nav-item"><a class="nav-link" href="?do=exit">Выйти</a></li>';
