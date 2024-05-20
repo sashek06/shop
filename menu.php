@@ -8,16 +8,7 @@
 	// $menu.='<h2><a href="about.php"><img src="images/about.png" width="20px">О нас</a> </h2>';
 
 	$menu.='<li class="nav-item">
-	<a class="nav-link active" aria-current="page" href="#">Главная</a>
-	</li>';
-	$menu.='<li class="nav-item">
-	<a class="nav-link" href="#">Витрина</a>
-	</li>';
-	$menu.='<li class="nav-item">
-	<a class="nav-link" href="#">Реквизиты</a>
-	</li>';
-	$menu.='<li class="nav-item">
-	<a class="nav-link" href="#">О нас</a>
+	<a class="nav-link" href="index.php">Главная</a>
 	</li>';
 
 	if ( !isset($_SESSION['level'])) $menu.='<li class="nav-item">
@@ -29,7 +20,7 @@
 	else {
 		$menu.='<li class="nav-item"><a class="nav-link disabled" href="#">'.$_SESSION['login'].'</a></li>';
 		$menu.='<li class="nav-item"><a class="nav-link" href="?do=exit">Выйти</a></li>';
-		$menu.='<li class="nav-item"><a class="nav-link" href="cart.php"><img src="images/cart2.svg" width="30px" height="24px"></a></li>';
+		$menu.='<li class="nav-item"><a class="nav-link" href="cart.php"><div id="cart_info">Корзина</div></a></li>';
 		if ( in_array($_SESSION['level'], array(2,1)) ) $menu.='<li class="nav-item><a class="nav-link" href="user_orders.php"><img src="images/order.png" height="18px">Заказы</a></li>';
 	};
 /* 	else {
@@ -52,7 +43,12 @@
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="orders.php">Заказы</a> </li>';
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="items.php">Содержимое заказов</a> </li>';
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="report_products.php">Малые остатки</a> </li>';
-		if ( in_array($_SESSION['level'], array(10)) ) $menu.='</ul>';
+		if ( in_array($_SESSION['level'], array(10)) ) $menu.='
+					</ul>
+					</ul>
+				</div>
+	  		</div>
+		</nav>';
 	};
 
 /* 	// меню по уровням доступа: 10 - админ и т.д.

@@ -16,72 +16,78 @@
 </head>
 
 <body>
-<table id="main_table" border="0">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+  <div class="container">
+  <a class="navbar-brand" href="#">
+      <img src="images/controller.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      WoWBoost
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+		<ul class="navbar-nav">
 			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="270px" class="menu" style="vertical-align:top;">
-			<?php
-				include('menu.php');
 				include('showcase.php');
 			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" style="vertical-align:top;"  >
-
-			<h1>О нас</h1>
-
-
-<p>
-Прокачка персонажа: Если вы хотите быстро прокачать своего персонажа до нужного уровня, наши профессиональные игроки помогут вам. 
-</p>
-<p>
-Мы предлагаем прокачку с 1 до 60 уровня, а также прокачку с 60 до 70, 80, 90, 100 и 110 уровней. 
-</p>
-<p>
-Вы можете выбрать любой уровень, который вам нужен, и мы выполним задание быстро и качественно.
-</p>
-<p>
-Рейды и достижения: Мы также предлагаем услуги по выполнению рейдов и достижений в WoW. 
-</p>
-<p>
-Если вы хотите получить лучшее снаряжение и достичь новых высот в игре, наши игроки помогут вам выполнить любые рейды и достижения. 
-</p>
-<p>
-Мы гарантируем успешное выполнение задания и получение награды.
-</p>
-<p>
-Продажа игровой валюты: Если вам нужны дополнительные игровые средства для покупки снаряжения, оружия и других предметов, 
-мы предлагаем продажу игровой валюты. Мы гарантируем быструю и безопасную доставку игровых средств.
-</p>
-<p>
-Конфиденциальность и безопасность: Мы понимаем, что безопасность и конфиденциальность ваших данных крайне важны. Поэтому мы гарантируем абсолютную конфиденциальность ваших персональных данных и безопасность вашего аккаунта. Мы используем только надежные методы выполнения заданий и не нарушаем правила игры.
-</p>
-<p>
-Спасибо за ваш выбор!
-</p>
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
+		</ul>
+		<ul class="navbar-nav">
 			<?php
-				include('footer.php');
+				include('menu.php');
 			?>
-		</td>
-	</tr>
+		</ul>
+    </div>
+  </div>
+</nav>
 
-</table>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      	<div class="col-10 col-sm-8 col-lg-6">
+       		<img src="images/raids.webp" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" style="border-radius: 30%;">
+		</div>
+		<div class="col-lg-6">
+        	<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Рейды и достижения</h1>
+        	<p class="lead">Пройдите эпические рейды и заработайте престижные достижения с помощью наших профессионалов. Получите редкие трофеи и выполните уникальные задания быстро и эффективно!</p>
+		</div>
+	</div>
+</div>
 
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row align-items-center g-5 py-5">
+      	<div class="col-10 col-sm-8 col-lg-6">
+       		<img src="images/gold.webp" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" style="border-radius: 30%;">
+		</div>
+		<div class="col-lg-6">
+        	<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Золото и игровое время</h1>
+        	<p class="lead">Увеличьте свои запасы золота и продлите игровое время с нашими безопасными и надежными услугами. Будьте всегда готовы к новым приключениям в Азероте!</p>
+		</div>
+	</div>
+</div>
+
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      	<div class="col-10 col-sm-8 col-lg-6">
+       		<img src="images/safety.webp" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" style="border-radius: 30%;">
+		</div>
+		<div class="col-lg-6">
+        	<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Безопасность и надежность</h1>
+        	<p class="lead">Мы гарантируем полную безопасность и надежность всех наших услуг. Ваш аккаунт и данные находятся под надежной защитой благодаря современным методам шифрования и строгим стандартам безопасности.</p>
+		</div>
+	</div>
+</div>
+
+  
+
+<footer class="footer mt-auto py-3 bg-body-tertiary">
+  <div class="container">
+    <span class="text-body-secondary">
+		<?php
+			include('footer.php');
+		?>
+	</span>
+  </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

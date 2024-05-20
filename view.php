@@ -82,26 +82,11 @@
 
 </script>
 
-<html data-bs-theme="dark">
-<head>
-	<meta charset="utf-8">
-	<title><?php echo $title;?></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-<script>
-	function btn_reset_click() {
-		$('input').val('');
-	};
-</script>
+<?php
+    include('showcase.php');
+    include('menu.php');
+?>
 
-<style>
-	input{
-		width:100%;
-	}
-</style>
-
-</head>
-
-<body>
 <table id="main_table">
 	<!-- баннер -->
 	<tr>
@@ -248,16 +233,8 @@
 		</td>
 	</tr>
 
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
 </table>
 
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

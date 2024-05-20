@@ -8,62 +8,55 @@
 	include('func.php');
 	$title='Главная';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="#">
-      <img src="images/controller.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      WoWBoost
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
-		<ul class="navbar-nav">
-			<?php
-				include('showcase.php');
-			?>
-		</ul>
-		<ul class="navbar-nav">
-			<?php
-				include('menu.php');
-			?>
-		</ul>
+<?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<div class="container d-flex align-items-center h-100">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+                <a href="gear.php" class="text-decoration-none text-body" style="display: inline-block;">
+                    <img class="d-block mx-auto mb-4" src="images/raids.webp" alt="Снаряжение" width="200" height="200" style="border-radius: 30%;">
+                    <h1 class="display-6">PvE</h1>
+                    <p class="lead mb-4">Максимальный прогресс в PVE за минимальное время.</p>
+                </a>
+            </div>
+            <style>
+                .main__card:hover {
+                    transform: translateY(-10px) scale(1.1);
+                }
+            </style>
+        </div>
+        <div class="col-md-4">
+            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+                <a href="rep.php" class="text-decoration-none text-body">
+                    <img class="d-block mx-auto mb-4" src="images/pvp.webp" alt="Репутация" width="200" height="200" style="border-radius: 30%;">
+                    <h1 class="display-6">PvP</h1>
+                    <p class="lead mb-4">Повышайте рейтинг в PVP с нашей помощью!</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+                <a href="achiv.php" class="text-decoration-none text-body">
+                    <img class="d-block mx-auto mb-4" src="images/gold.webp" alt="Достижения" width="200" height="200" style="border-radius: 30%;">
+                    <h1 class="display-6">Золото</h1>
+                    <p class="lead mb-4">Больше золота – больше возможностей в игре."</p>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
+</div>
 
-<div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="images/lvlup.webp" alt="" width="200" height="200" style="border-radius: 30%;">
-    <h1 class="display-5 fw-bold text-body-emphasis">Эпичный прогресс</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Ускорьте прогресс в World of Warcraft с нашими бустинг-услугами! Легко достигайте целей как в PvE, так и в PvP. Безопасный и надежный сервис от профессионалов. Присоединяйтесь к тысячам довольных игроков и станьте сильнейшим в Азероте!</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Подробнее</button>
-<!--         <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button> -->
-      </div>
-    </div>
-  </div>
-
-<section class="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<?php
-					include('footer.php');
-				?>
-			</div>
-		</div>
-	</div>
-</section>
-
-<script src="js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php
+    include('footer.php');
+?>
