@@ -20,7 +20,7 @@ $query = "
 
 echo '
 <html data-bs-theme="dark">
-<body class="d-flex flex-column h-100">
+<body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container">
   <a class="navbar-brand" href="index.php">

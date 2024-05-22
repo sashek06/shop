@@ -1,110 +1,85 @@
 <?php
-	/*
-	Главная страница
-	*/
-	header('Content-type: text/html; charset=utf-8');
-	error_reporting(E_ALL);
-	include('auth.php');
-	include('func.php');
-	$title='Страница оплаты';
+/*
+Главная страница
+*/
+header('Content-type: text/html; charset=utf-8');
+error_reporting(E_ALL);
+include('auth.php');
+include('func.php');
+$title = 'Страница оплаты';
 ?>
-<html data-bs-theme="dark">
+
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-	<meta charset="utf-8">
-	<title><?php echo $title;?></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-<table id="main_table" border="0">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
 
-	<tr>
-		<!-- меню -->
-		<td width="270px" class="menu" style="vertical-align:top;">
-			<?php
-				include('menu.php');
-				include('showcase.php');
-			?>
-		</td>
+<?php
+    include('showcase.php');
+    include('menu.php');
+?>
 
-		<!-- контент -->
-		<td width="900px" style="vertical-align:top;">
+<section class="checkout mt-5 pt-5" style="min-height: 100vh;">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8 ">
+				<form class="credit-card" method="POST" action="user_orders.php">
+					<h4 class="title">Данные карты</h4>
+					<div class="mb-3">
+						<label for="card1" class="form-label">Номер карты</label>
+						<div class="d-flex">
+							<input type="text" name="card1" id="card1" class="form-control me-1" pattern="[0-9]{4}" maxlength="4" required>
+							<input type="text" name="card2" id="card2" class="form-control me-1" pattern="[0-9]{4}" maxlength="4" required>
+							<input type="text" name="card3" id="card3" class="form-control me-1" pattern="[0-9]{4}" maxlength="4" required>
+							<input type="text" name="card4" id="card4" class="form-control" pattern="[0-9]{4}" maxlength="4" required>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="expiration" class="form-label">Срок действия</label>
+						<div class="d-flex">
+							<select name="Month" class="form-select me-1" required>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+							<select name="Year" class="form-select" required>
+								<option value="2023">2023</option>
+								<option value="2024">2024</option>
+								<option value="2025">2025</option>
+								<option value="2026">2026</option>
+								<option value="2027">2027</option>
+								<option value="2028">2028</option>
+								<option value="2029">2029</option>
+								<option value="2030">2030</option>
+								<option value="2031">2031</option>
+								<option value="2032">2032</option>
+							</select>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="cvv" class="form-label">CVV</label>
+						<input type="text" name="cvv" id="cvv" class="form-control" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Продолжить</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
 
-
-
-<form class="credit-card" method="POST" action="user_orders.php">
-<h4 class="title">Данные карты</h4>
-<!-- Card Number -->
-<p>
-Номер карты:
-<input type="text" name="card1" id="card1" class="card-number" pattern="[0-9]{4}" size=4 required> -
-<input type="text" name="card2" id="card2" class="card-number" pattern="[0-9]{4}" size=4 required> -
-<input type="text" name="card3" id="card3" class="card-number" pattern="[0-9]{4}" size=4 required> -
-<input type="text" name="card4" id="card4" class="card-number" pattern="[0-9]{4}" size=4 required><br>
-</p>
-<p>
-Срок действия:
-<select name="Month" required>
-	<option value="january">01</option>
-	<option value="february">02</option>
-	<option value="march">03</option>
-	<option value="april">04</option>
-	<option value="may">05</option>
-	<option value="june">06</option>
-	<option value="july">07</option>
-	<option value="august">08</option>
-	<option value="september">09</option>
-	<option value="october">10</option>
-	<option value="november">11</option>
-	<option value="december">12</option>
-</select>
-
-<select name="Year" required>
-<option value="2023">2023</option>
-<option value="2024">2024</option>
-<option value="2025">2025</option>
-<option value="2026">2026</option>
-<option value="2027">2027</option>
-<option value="2028">2028</option>
-<option value="2029">2029</option>
-<option value="2030">2030</option>
-<option value="2031">2031</option>
-<option value="2032">2032</option>
-</select>
-</p>
-<p>
-CVV:
-<!-- Card Verification Field -->
-<input type="text"placeholder="CVV" required>
-</p>
-
-<!-- Buttons -->
-<button type="submit" class="proceed-btn">Продолжить</a></button>
-</div>
-</form>
-
-
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

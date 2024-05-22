@@ -208,10 +208,11 @@
     include('menu.php');
 ?>
 
+<section class="cart mt-5" style="min-height: 100vh;">
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8 pt-5">
-			<div class=" h1 text-center"><?php echo $title;?></div>
+		<div class="col-md-8">
+			<div class="h1 text-center"><?php echo $title;?></div>
 			<div id="cart" width="100%"></div>
 			<div class="order__button mt-4">
 				<button class="btn btn-primary btn-block" onclick="do_order()">Оформить заказ</button>
@@ -219,6 +220,7 @@
 		</div>
 	</div>
 </div>
+</section>
 
 <?php
     include('footer.php');
