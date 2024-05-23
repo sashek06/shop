@@ -19,7 +19,7 @@
 	$edit=in_array($_SESSION['level'], array(10, 2)) ? true : false;
 
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -39,30 +39,16 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="300px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<section class="orders">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8 h1 text-center"><?php echo $title;?></div>
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -197,79 +183,51 @@ echo			$buf_query="
 	// доступ к редактированию только админу
 	if ($edit) { // if (admin)
 ?>
-<form name="form" action="<?php echo $table?>.php" method="post">
-	<table width="900px">
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
-
-		<tr>
-			<td>Пользователь</td>
-			<td>
-				<input id="user_id" name="user_id" type="text" value="<?php if (!empty($user_id)) echo $user_id;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Дата</td>
-			<td>
-				<input id="dt" name="dt" class="datepicker_air" type="text" value="<?php if (!empty($dt)) echo $dt; else echo date('Y.m.d H:i:s');?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Статус</td>
-			<td>
-				<select id="status" name="status">
-					<?php
-						$query="
-							SELECT `id`, `descr`
-							FROM `statuses`
-							ORDER BY `id`
-						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($status==$row['id']) ? 'selected' : '';
-							echo "
-								<option value='$row[id]' $selected>$row[descr]</option>
-							";
-						};
-					?>
-				</select>
-			</td>
-		</tr>
-
-
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
-
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
-
+			<div class="col-md-8">
+			<form class="my-5" name="form" action="<?php echo $table?>.php" method="post">
+  <div class="mb-3">
+    <label for="user_id" class="form-label">Пользователь</label>
+    <input id="user_id" name="user_id" type="text" class="form-control" value="<?php if (!empty($user_id)) echo $user_id;?>">
+  </div>
+  <div class="mb-3">
+    <label for="dt" class="form-label">Дата</label>
+    <input id="dt" name="dt" type="text" class="form-control datepicker_air" value="<?php if (!empty($dt)) echo $dt; else echo date('Y.m.d H:i:s');?>">
+  </div>
+  <div class="mb-3">
+    <label for="status" class="form-label">Статус</label>
+    <select id="status" name="status" class="form-select">
+      <?php
+        $query = "
+          SELECT `id`, `descr`
+          FROM `statuses`
+          ORDER BY `id`
+        ";
+        $res = mysqli_query($con, $query) or die(mysqli_error($con));
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $selected = ($status == $row['id']) ? 'selected' : '';
+          echo "
+            <option value='{$row['id']}' $selected>{$row['descr']}</option>
+          ";
+        };
+      ?>
+    </select>
+  </div>
+  <input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
+  <div class="d-flex justify-content-between">
+    <button id="btn_reset" onclick="btn_reset_click();" type="button" class="btn btn-secondary">Очистить поля</button>
+    <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-primary">Сохранить</button>
+  </div>
 </form>
+			</div>
+		</div>
+	</div>
+</section>
+
+
 <?php
 	}; // if (admin)
 ?>
 
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

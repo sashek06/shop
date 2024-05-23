@@ -17,7 +17,7 @@
 	$title='Пользователи';
 	$table='users';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -36,30 +36,17 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="30%" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="70%" class="content" align='center'>
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<section class="orders">
+	<div class="container">
+		<div class="row justify-content-center my-5">
+			<div class="col-md-8 h1 text-center"><?php echo $title;?></div>
+			<div class="col-md-12">
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -174,120 +161,72 @@
 	// доступ к редактированию только админу
 	if ($_SESSION['login']=='admin') { // if (admin)
 ?>
-<form name="form" action="<?php echo $table?>.php" method="post">
-	<table>
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
-
-		<tr>
-			<td>Фамилия</td>
-			<td>
-				<input id="surname" name="surname" type="text" value="<?php if (!empty($surname)) echo $surname;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Имя</td>
-			<td>
-				<input id="name" name="name" type="text" value="<?php if (!empty($name)) echo $name;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Отчество</td>
-			<td>
-				<input id="middlename" name="middlename" type="text" value="<?php if (!empty($middlename)) echo $middlename;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Должность</td>
-			<td>
-				<input id="rank" name="rank" type="text" value="<?php if (!empty($rank)) echo $rank;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Уровень</td>
-			<td>
-				<select id="level" name="level">
-					<?php
-						$query="
-							SELECT `descr`, `id`
-							FROM `levels`
-							ORDER BY `id`
-						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($level==$row['id']) ? 'selected' : '';
-							echo "
-								<option value='$row[id]' $selected>$row[descr]</option>
-							";
-						};
-					?>
-				</select>
-			</td>
-		</tr>
-
-		<tr>
-			<td>Адрес</td>
-			<td>
-				<input id="address" name="address" type="text" value="<?php if (!empty($address)) echo $address;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Телефон</td>
-			<td>
-				<input id="phone" name="phone" type="text" value="<?php if (!empty($phone)) echo $phone;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Пароль</td>
-			<td>
-				<input id="password" name="password" type="text" value="<?php if (!empty($password)) echo $password;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Логин</td>
-			<td>
-				<input id="login" name="login" type="text" value="<?php if (!empty($login)) echo $login;?>">
-			</td>
-		</tr>
-
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
-
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
-
+			</div>
+			<div class="col-md-8">
+			<form name="form" action="<?php echo $table?>.php" method="post" class="my-5">
+  <div class="mb-3">
+    <label for="surname" class="form-label">Фамилия</label>
+    <input id="surname" name="surname" type="text" class="form-control" value="<?php if (!empty($surname)) echo $surname; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Имя</label>
+    <input id="name" name="name" type="text" class="form-control" value="<?php if (!empty($name)) echo $name; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="middlename" class="form-label">Отчество</label>
+    <input id="middlename" name="middlename" type="text" class="form-control" value="<?php if (!empty($middlename)) echo $middlename; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="rank" class="form-label">Должность</label>
+    <input id="rank" name="rank" type="text" class="form-control" value="<?php if (!empty($rank)) echo $rank; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="level" class="form-label">Уровень</label>
+    <select id="level" name="level" class="form-select">
+      <?php
+        $query = "
+          SELECT `descr`, `id`
+          FROM `levels`
+          ORDER BY `id`
+        ";
+        $res = mysqli_query($con, $query) or die(mysqli_error($con));
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $selected = ($level == $row['id']) ? 'selected' : '';
+          echo "<option value='{$row['id']}' $selected>{$row['descr']}</option>";
+        };
+      ?>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">Адрес</label>
+    <input id="address" name="address" type="text" class="form-control" value="<?php if (!empty($address)) echo $address; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Телефон</label>
+    <input id="phone" name="phone" type="text" class="form-control" value="<?php if (!empty($phone)) echo $phone; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль</label>
+    <input id="password" name="password" type="text" class="form-control" value="<?php if (!empty($password)) echo $password; ?>">
+  </div>
+  <div class="mb-3">
+    <label for="login" class="form-label">Логин</label>
+    <input id="login" name="login" type="text" class="form-control" value="<?php if (!empty($login)) echo $login; ?>">
+  </div>
+  <input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id; ?>">
+  <div class="d-flex justify-content-between">
+    <button id="btn_reset" onclick="btn_reset_click();" type="button" class="btn btn-secondary">Очистить поля</button>
+    <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-primary">Сохранить</button>
+  </div>
 </form>
+			</div>
+		</div>
+	</div>
+</section>
+
 <?php
 	}; // if (admin)
 ?>
-
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

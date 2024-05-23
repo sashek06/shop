@@ -87,10 +87,7 @@
 
 <section class="cart mt-5" style="min-height: 100vh;">
 <div class="container">
-	<div class="h1 text-center mb-5">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
-			
+	<div class="h1 text-center">		
 <?php
     $cat_id=empty($_GET['cat_id']) ? '' : abs(intval($_GET['cat_id']));
     if ($cat_id) {
@@ -163,7 +160,7 @@
                 };
 
                 if ($row['delta']<30) { // товар добавлен меньше 30 дней назад, т.е. это новинка
-                    $new="<div><img src='images/new.png' style='width:70px'></div>";
+                    $new="";
                 }
                 else {
                     $new='';
@@ -172,8 +169,7 @@
                 if ($row['discount_value']) { // цена со скидкой
                     $price_new=number_format (round($row['price']*(1-$row['discount_value']/100), 2), 2, '.', '');
                     $price_str="
-                        <font style='color: #888; font-size:x-small; text-decoration:line-through'>$row[price]$valuta</font>
-                        <img src='images/discount.png' height='24px' title='Скидка'>
+                        <font style='color: #888; font-size:small; text-decoration:line-through'>$row[price]$valuta</font><br>
                         $price_new$valuta
                     ";
                     $price_str=trim($price_str);
@@ -191,8 +187,7 @@
                 };
 
                 echo "
-                <div class='col-md-6'>
-                    <div class='card' style='width: 18rem;'>
+                    <div class='card my-3 mx-3 px-0 col-xl-3 col-lg-4 col-md-6 col-sm-8 col-xs-8'>
                         <img src='$fname' class='card-img-top' alt='$row[name]' style='cursor:pointer;' onclick='to_cart($row[id]);'>
                         <div class='card-body'>
                             <h5 class='card-title'>$row[name]</h5>
@@ -202,18 +197,14 @@
                             	<button onclick='to_cart($row[id]);' class='btn btn-success'>В корзину</button>
 							</div>
                         </div>
-                        $new
                     </div>
-                </div>
                 ";
             };
         };
     };
-    echo '</div></div>';
+    echo '</div>';
 ?>
-		</div>
 	</div>
-</div>
 </section>
 
 <?php

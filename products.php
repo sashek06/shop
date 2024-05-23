@@ -18,7 +18,7 @@
 	$title='Товары';
 	$table='products';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -37,30 +37,19 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="300px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<table id="main_table">
+
+<section class="product-table">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class=" col-12 h1 mt-5 text-center""><?php echo $title;?></div>
+			<div class="col-12">
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -201,140 +190,111 @@
 
 	echo SQLResultTable($query, $con, '');
 ?>
+			</div>
+		</div>
+</section>
 
 <?php
 	// доступ к редактированию только админу
 	if ($edit) { // if (admin)
 ?>
-<form name="form" action="<?php echo $table?>.php" method="post" enctype="multipart/form-data">
-	<table>
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
 
-		<tr>
-			<td>Наименование</td>
-			<td>
-				<input type="text" id="name" name="name" value="<?php if (!empty($name)) echo $name;?>">
-			</td>
-		</tr>
+<section class="add-form">
+	<div class="container">
+		<div class="row justify-content-center">
+		<form class="col-6" name="form" action="<?php echo $table?>.php" method="post" enctype="multipart/form-data">
+			<div class="h2 my-3">
+				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)"; ?></p>
+			</div>
 
-		<tr>
-			<td>Описание</td>
-			<td>
-				<textarea id="descr" name="descr" type="textarea"><?php if (!empty($descr)) echo $descr;?></textarea>
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="name" class="form-label">Наименование</label>
+				<input type="text" class="form-control" id="name" name="name" value="<?php if (!empty($name)) echo $name; ?>">
+			</div>
 
-		<tr>
-			<td>Цена за 1ед. </td>
-			<td>
-				<input type="text" id="price" name="price" value="<?php if (!empty($price)) echo $price;?>">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="descr" class="form-label">Описание</label>
+				<textarea class="form-control" id="descr" name="descr" rows="3"><?php if (!empty($descr)) echo $descr; ?></textarea>
+			</div>
 
-		<tr>
-			<td>Категория</td>
-			<td>
-				<select id="cat_id" name="cat_id">
+			<div class="mb-3">
+				<label for="price" class="form-label">Цена за 1ед.</label>
+				<input type="text" class="form-control" id="price" name="price" value="<?php if (!empty($price)) echo $price; ?>">
+			</div>
+
+			<div class="mb-3">
+				<label for="cat_id" class="form-label">Категория</label>
+				<select class="form-control" id="cat_id" name="cat_id">
 					<?php
-						$query="
+						$query = "
 							SELECT `id`, `name`, `descr`
 							FROM `categories`
-							WHERE
-								id<>0
+							WHERE id<>0
 							ORDER BY `name`
 						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($cat_id==$row['id']) ? 'selected' : '';
+						$res = mysqli_query($con, $query) or die(mysqli_error($con));
+						while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+							$selected = ($cat_id == $row['id']) ? 'selected' : '';
 							echo "
 								<option value='$row[id]' $selected>$row[name]</option>
 							";
-						};
+						}
 					?>
 				</select>
-			</td>
-		</tr>
+			</div>
 
-		<tr>
-			<td>Количество</td>
-			<td>
-				<input type="text" id="amount" name="amount" value="<?php if (!empty($amount)) echo $amount;?>">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="amount" class="form-label">Количество</label>
+				<input type="text" class="form-control" id="amount" name="amount" value="<?php if (!empty($amount)) echo $amount; ?>">
+			</div>
 
-<!--
-		<tr>
-			<td>Масса</td>
-			<td>
-				<input type="text" id="weight" name="weight" value="<?php if (!empty($weight)) echo $weight;?>">
-			</td>
-		</tr>
--->
-
-		<tr>
-			<td>Скидка или акция</td>
-			<td>
-				<select id="discount_id" name="discount_id">
+			<div class="mb-3">
+				<label for="discount_id" class="form-label">Скидка или акция</label>
+				<select class="form-control" id="discount_id" name="discount_id">
 					<option value='0'>нет скидки</option>
 					<?php
-						$query="
+						$query = "
 							SELECT `id`, `name`, `value`
 							FROM `discounts`
-							WHERE	1
-								AND NOW() BETWEEN `start` AND `stop`
+							WHERE 1
+							AND NOW() BETWEEN `start` AND `stop`
 							ORDER BY `name`
 						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($discount_id==$row['id']) ? 'selected' : '';
+						$res = mysqli_query($con, $query) or die(mysqli_error($con));
+						while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+							$selected = ($discount_id == $row['id']) ? 'selected' : '';
 							echo "
 								<option value='$row[id]' $selected>$row[name] ($row[value]%)</option>
 							";
-						};
+						}
 					?>
 				</select>
-			</td>
-		</tr>
+			</div>
 
-		<tr>
-			<td>Фото</td>
-			<td>
-				<input type="file" name="file">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="file" class="form-label">Фото</label>
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
 
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
+			<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id; ?>">
 
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
+			<div class="mb-3">
+				<button type="reset" class="btn btn-secondary" onclick="btn_reset_click();">Очистить поля</button>
+				<button type="submit" class="btn btn-primary" name="btn_submit">Сохранить</button>
+			</div>
+		</form>
+		</div>
+	</div>
+</section>
 
-</form>
 <?php
 	}; // if (admin)
 ?>
 
 		</td>
 	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
 </table>
 
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

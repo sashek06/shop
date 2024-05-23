@@ -12,7 +12,7 @@
 	$con=connect();
 	$table='products';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -92,101 +92,80 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="280px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
 
 <?php
-	$product_id=empty($_GET['product_id']) ? 0 : abs(intval($_GET['product_id']));
-	$query="
-		SELECT
-			`$table`.`id`,
-			`$table`.`name`,
-			`$table`.`descr`,
-			`categories`.`name` AS `category`,
-			`$table`.`price`,
-			`discounts`.`value` AS `discount_value`,
-			TIMESTAMPDIFF(DAY, `$table`.`date_add`, NOW()) AS `delta`
-		FROM
-			`$table`
-		LEFT JOIN
-			`categories` ON `categories`.`id`=`$table`.`cat_id`
-		LEFT JOIN
-			`discounts` ON `discounts`.`id`=`$table`.`discount_id` AND NOW() BETWEEN `discounts`.`start` AND `discounts`.`stop`
-		WHERE 1
-			AND products.id=$product_id
-	";
-	$res=mysqli_query($con, $query) or die(mysqli_error($con));
-
-	$row=mysqli_fetch_array($res, MYSQLI_ASSOC);
-
-	$fname='upload/'.$row['id'].'.jpg';
-	if (!file_exists($fname)) { // если нет файла, показать "НЕТ ФОТО"
-		$fname='upload/0.jpg';
-	};
-
-	if ($row['delta']<30) { // товар добавлен меньше 30 дней назад, т.е. это новинка
-		$new="<div><img src='images/new.png' style='width:100px'></div>";
-	}
-	else {
-		$new='';
-	};
-
-	if ($row['discount_value']) { // цена со скидкой
-		$price_new=number_format (round($row['price']*(1-$row['discount_value']/100), 2), 2, '.', '');
-		$price_str="
-			<font style='color: #888; font-size:x-small; text-decoration:line-through'>$row[price]$valuta</font>
-			<img src='images/discount.png' height='24px' title='Скидка'>
-			<font style='color: #000;'>$price_new$valuta</font>
-		";
-		$price_str=trim($price_str);
-	}
-	else {
-		$price_str="<font style='color: #000;'>$row[price]$valuta</font>";
-	};
-
-	echo "
-		<h1>$row[name]</h1>
-		$new
-		<p>$row[descr]</p>
-		<img src=\"$fname\" width=\"500px\" height=\"500px\" style='cursor:pointer;' onclick='to_cart($row[id]);'><br>
-		<p>Цена: $price_str</p>
-		<button onclick='to_cart($row[id]);'>В корзину</button>
-	";
-
+    include('showcase.php');
+    include('menu.php');
 ?>
 
-		</td>
-	</tr>
+<section class="product-page" style="min-height: 100vh;">
+	<div class="container">
+	<?php
+    $product_id = empty($_GET['product_id']) ? 0 : abs(intval($_GET['product_id']));
+    $query = "
+        SELECT
+            `$table`.`id`,
+            `$table`.`name`,
+            `$table`.`descr`,
+            `categories`.`name` AS `category`,
+            `$table`.`price`,
+            `discounts`.`value` AS `discount_value`,
+            TIMESTAMPDIFF(DAY, `$table`.`date_add`, NOW()) AS `delta`
+        FROM
+            `$table`
+        LEFT JOIN
+            `categories` ON `categories`.`id` = `$table`.`cat_id`
+        LEFT JOIN
+            `discounts` ON `discounts`.`id` = `$table`.`discount_id` AND NOW() BETWEEN `discounts`.`start` AND `discounts`.`stop`
+        WHERE
+            products.id = $product_id
+    ";
+    $res = mysqli_query($con, $query) or die(mysqli_error($con));
 
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
+    $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
-</table>
+    $fname = 'upload/'.$row['id'].'.jpg';
+    if (!file_exists($fname)) { 
+        $fname = 'upload/0.jpg';
+    };
 
-</body>
-</html>
+    if ($row['delta'] < 30) { 
+        $new = "<div><img src='images/new.png' style='width:100px'></div>";
+    } else {
+        $new = '';
+    };
+
+    if ($row['discount_value']) {
+        $price_new = number_format(round($row['price'] * (1 - $row['discount_value'] / 100), 2), 2, '.', '');
+        $price_str = "
+            <font style='color: #888; font-size:x-small; text-decoration:line-through'>{$row['price']}{$valuta}</font>
+            <img src='images/discount.png' height='24px' title='Скидка'>
+            <font>{$price_new}{$valuta}</font>
+        ";
+        $price_str = trim($price_str);
+    } else {
+        $price_str = "<font>{$row['price']}{$valuta}</font>";
+    };
+
+    echo "
+        <div class='row flex-lg-row-reverse align-items-center g-5 py-5 mx-5'>
+            <div class='col-10 col-sm-8 col-lg-6'>
+                <img src='$fname' class='d-block mx-lg-auto img-fluid' alt='{$row['name']}' width='700' height='500' loading='lazy' style='cursor:pointer;' onclick='to_cart({$row['id']});'>
+            </div>
+            <div class='col-lg-6'>
+                <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>{$row['name']}</h1>
+                <p class='lead'>{$row['descr']}</p>
+                <p>Цена: $price_str</p>
+                <div class='d-grid gap-2 d-md-flex justify-content-md-start'>
+                    <button type='button' class='btn btn-primary btn-lg px-4 me-md-2' onclick='to_cart({$row['id']});'>В корзину</button>
+                </div>
+            </div>
+        </div>
+    ";
+?>
+	</div>
+</section>
+
+<?php
+    include('footer.php');
+?>
