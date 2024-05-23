@@ -24,7 +24,7 @@
 
 
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -47,36 +47,31 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="300px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
-
-<form>
-		Период с <input name="dt1" id="dt1" type="date" value="<?php echo $dt1?>" style="width:200px">
-		по <input name="dt2" id="dt2" type="date" value="<?php echo $dt2?>" style="width:200px">
-		<input type="submit" value="ОК" style="width:100px">
-</form>
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<section class="items">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8 d-flex justify-content-center mt-5">
+				<form>
+				<div class="mb-3">
+					<label for="dt1" class="form-label">Период с</label>
+					<input name="dt1" id="dt1" type="date" class="form-control" value="<?php echo $dt1;?>" style="width:200px; display: inline-block;">
+
+					<label for="dt2" class="form-label">по</label>
+					<input name="dt2" id="dt2" type="date" class="form-control" value="<?php echo $dt2;?>" style="width:200px; display: inline-block;">
+				</div>
+				<div class="mb-3 d-flex justify-content-center">
+					<input type="submit" value="ОК" class="btn btn-primary" style="width:100px;">
+				</div>
+				</form>
+			</div>
+			<div class="h1 col-12 text-center mb-5"><?php echo $title;?></div>
+			<div class="col-12">
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -178,97 +173,73 @@
 
 	echo SQLResultTable($query, $con, '');
 ?>
+			</div>
+			<?php
+				// доступ к редактированию только админу
+				if ($_SESSION['login']=='admin') { // if (admin)
+			?>
+			<div class="col-md-8 my-5">
+			<form name="form" action="<?php echo $table?>.php" method="post">
+			<div class="mb-3">
+				<p class="h2 form-label">Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
+			</div>
 
-<?php
-	// доступ к редактированию только админу
-	if ($_SESSION['login']=='admin') { // if (admin)
-?>
-<form name="form" action="<?php echo $table?>.php" method="post">
-	<table>
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
+			<div class="mb-3">
+				<label for="ord_id" class="form-label">№ заказа</label>
+				<input id="ord_id" name="ord_id" type="text" class="form-control" value="<?php if (!empty($ord_id)) echo $ord_id;?>">
+			</div>
 
-		<tr>
-			<td>№ заказа</td>
-			<td>
-				<input id="ord_id" name="ord_id" type="text" value="<?php if (!empty($ord_id)) echo $ord_id;?>">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="amount" class="form-label">Количество</label>
+				<input id="amount" name="amount" type="text" class="form-control" value="<?php if (!empty($amount)) echo $amount;?>">
+			</div>
 
-		<tr>
-			<td>Количество</td>
-			<td>
-				<input id="amount" name="amount" type="text" value="<?php if (!empty($amount)) echo $amount;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Товар</td>
-			<td>
-				<select id="product_id" name="product_id">
-					<?php
-						$query="
-							SELECT `id`, `name`
-							FROM `products`
-							ORDER BY `name`
-						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($product_id==$row['id']) ? 'selected' : '';
-							echo "
-								<option value='$row[id]' $selected>$row[name]</option>
-							";
-						};
-					?>
+			<div class="mb-3">
+				<label for="product_id" class="form-label">Товар</label>
+				<select id="product_id" name="product_id" class="form-select">
+				<?php
+					$query="
+					SELECT `id`, `name`
+					FROM `products`
+					ORDER BY `name`
+					";
+					$res=mysqli_query($con, $query) or die(mysqli_error($con));
+					while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+					$selected= ($product_id==$row['id']) ? 'selected' : '';
+					echo "
+						<option value='$row[id]' $selected>$row[name]</option>
+					";
+					};
+				?>
 				</select>
-			</td>
-		</tr>
+			</div>
 
-		<tr>
-			<td>Цена за 1ед. </td>
-			<td>
-				<input id="price" name="price" type="text" value="<?php if (!empty($price)) echo $price;?>">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="price" class="form-label">Цена за 1ед.</label>
+				<input id="price" name="price" type="text" class="form-control" value="<?php if (!empty($price)) echo $price;?>">
+			</div>
 
-		<tr>
-			<td>Пользователь</td>
-			<td>
-				<input id="user_id" name="user_id" type="text" value="<?php if (!empty($user_id)) echo $user_id;?>">
-			</td>
-		</tr>
+			<div class="mb-3">
+				<label for="user_id" class="form-label">Пользователь</label>
+				<input id="user_id" name="user_id" type="text" class="form-control" value="<?php if (!empty($user_id)) echo $user_id;?>">
+			</div>
 
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
+			<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
 
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
+			<div class="mb-3">
+				<button id="btn_reset" type="button" class="btn btn-secondary" onclick="btn_reset_click();">Очистить поля</button>
+				<button id="btn_submit" name="btn_submit" type="submit" class="btn btn-primary">Сохранить</button>
+			</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</section>
 
-</form>
 <?php
 	}; // if (admin)
 ?>
 
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

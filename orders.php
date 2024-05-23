@@ -46,8 +46,9 @@
 
 <section class="orders">
 	<div class="container">
+		<div class="h1 text-center mt-5"><?php echo $title;?></div>
 		<div class="row justify-content-center">
-			<div class="col-md-8 h1 text-center"><?php echo $title;?></div>
+		<div class="col-12">
 			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
@@ -178,6 +179,7 @@ echo			$buf_query="
 
 	echo SQLResultTable($query, $con, '');
 ?>
+</div>
 
 <?php
 	// доступ к редактированию только админу
