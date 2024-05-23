@@ -6,24 +6,104 @@
 </head>
 
 <body>
-<table id="main_table" border="0">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
+	<section class="reg d-flex align-items-center" style="min-height: 100vh;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+				<form name="form" action="reg.php" method="post">
+        <?php
+            header('Content-type: text/html; charset=utf-8');
+            include "database.php";
+            include "func.php";
+            include "styles.php";
+            include "scripts.php";
+            $con=connect();
 
-	<tr>
-		<!-- меню -->
-		<td class='menu2'>
-			<?php
-				include('menu.php');
-			?>
-		</td>
-		<!-- контент -->
+            if (!empty($_POST['surname']) && !empty($_POST['login']) && !empty($_POST['password']) ) {
+                $surname=mysqli_real_escape_string($con, trim($_POST['surname']));
+                $name=mysqli_real_escape_string($con, trim($_POST['name']));
+                $middlename=mysqli_real_escape_string($con, trim($_POST['middlename']));
+                $phone=mysqli_real_escape_string($con, trim($_POST['phone']));
+                $address=mysqli_real_escape_string($con, trim($_POST['address']));
+                $password=mysqli_real_escape_string($con, trim($_POST['password']));
+                $login=mysqli_real_escape_string($con, trim($_POST['login']));
+
+                $fields="
+                        `surname`='$surname',
+                        `name`='$name',
+                        `middlename`='$middlename',
+                        `rank`='',
+                        `level`='1',
+                        `phone`='$phone',
+                        `address`='$address',
+                        `password`='$password',
+                        `login`='$login'
+                ";
+
+                $query="
+                    SELECT COUNT(*)
+                    FROM `users`
+                    WHERE 1
+                        AND `login`='$login'
+                ";
+                $res=mysqli_query($con, $query) or die(mysqli_error($con));
+                if (mysqli_fetch_array($res, MYSQLI_BOTH)[0]) {
+                    echo '<p class="text-danger">Пользователь с таким логином уже существует!</p>';
+                } else {
+                    $query="
+                        INSERT INTO `users`
+                        SET
+                            $fields
+                    ";
+                    $res=mysqli_query($con, $query);
+                    if ($res) {
+                        echo '<p class="text-success">Регистрация прошла успешно!
+                        <a href="login.php"><u>Авторизуйтесь в системе</u></a>
+                        </p>';
+                    } else {
+                        die(mysqli_error($con));
+                    }
+                }
+            } else if (!empty($_POST['btn_submit'])){
+                echo '<p class="text-danger">Введите ФИО, логин и пароль!</p>';
+            }
+        ?>
+        <div class="mb-3">
+            <label for="surname" class="form-label">Фамилия</label>
+            <input type="text" class="form-control" id="surname" name="surname" pattern="[A-Za-zА-Яа-яЁё]{1,}" value="<?php if (!empty($surname)) echo $surname;?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-zА-Яа-я]{1,}" value="<?php if (!empty($name)) echo $name;?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="middlename" class="form-label">Отчество</label>
+            <input type="text" class="form-control" id="middlename" name="middlename" pattern="[A-Za-zА-Яа-я]{1,}" value="<?php if (!empty($middlename)) echo $middlename;?>">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Адрес</label>
+            <input type="text" class="form-control" id="address" name="address" pattern="[A-Za-zА-Яа-я0-9 ,.]+" value="<?php if (!empty($address)) echo $address;?>">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Телефон</label>
+            <input type="text" class="form-control" id="phone" name="phone" pattern="\d+" value="<?php if (!empty($phone)) echo $phone;?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="login" class="form-label">Логин</label>
+            <input type="text" class="form-control" id="login" name="login" value="<?php if (!empty($login)) echo $login;?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password" value="<?php if (!empty($password)) echo $password;?>" required>
+        </div>
+        <button type="reset" class="btn btn-secondary">Очистить поля</button>
+        <button type="submit" class="btn btn-primary" name="btn_submit">Сохранить</button>
+    </form>
+				</div>
+			</div>
+		</div>
+	</section>
+<table id="main_table" border="0">
 		<td class="content">
 
 <div align="center" >
@@ -159,16 +239,6 @@
 
 		</td>
 	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
 </table>
 
 </body>
