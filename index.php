@@ -21,10 +21,11 @@ include('showcase.php');
 include('menu.php');
 ?>
 
-<div class="container d-flex align-items-center h-100">
+<section class="main d-flex flex-column justify-content-center" style="min-height: 100vh;">
+<div class="container">
     <div class="row">
         <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
                 <a href="gear.php" class="text-decoration-none text-body" style="display: inline-block;">
                     <img class="d-block mx-auto mb-4" src="images/raids.webp" alt="Снаряжение" width="200" height="200" style="border-radius: 30%;">
                     <h1 class="display-6">PvE</h1>
@@ -38,7 +39,7 @@ include('menu.php');
             </style>
         </div>
         <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
                 <a href="rep.php" class="text-decoration-none text-body">
                     <img class="d-block mx-auto mb-4" src="images/pvp.webp" alt="Репутация" width="200" height="200" style="border-radius: 30%;">
                     <h1 class="display-6">PvP</h1>
@@ -47,7 +48,7 @@ include('menu.php');
             </div>
         </div>
         <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
+            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
                 <a href="achiv.php" class="text-decoration-none text-body">
                     <img class="d-block mx-auto mb-4" src="images/gold.webp" alt="Достижения" width="200" height="200" style="border-radius: 30%;">
                     <h1 class="display-6">Золото</h1>
@@ -57,6 +58,7 @@ include('menu.php');
         </div>
     </div>
 </div>
+</section>
 
 <?php
 include('footer.php');

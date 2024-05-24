@@ -31,30 +31,17 @@
 </script>
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="300px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<section class="discounts">
+	<div class="container">
+		<div class="h1 text-center mt-5"><?php echo $title;?></div>
+		<div class="row justify-content-center my-5">
+			<div class="col-12">
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -142,77 +129,50 @@
 
 	echo SQLResultTable($query, $con, '');
 ?>
-
+			</div>
+			<div class="col-md-8 mt-5">
 <?php
-	// доступ к редактированию только админу
-	if ($edit) { // if (admin)
+// доступ к редактированию только админу
+if ($edit) { // if (admin)
 ?>
-<form name="form" action="<?php echo $table?>.php" method="post">
-	<table>
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
+			<form name="form" action="<?php echo $table?>.php" method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Наименование акции/скидки</label>
+    <input id="name" name="name" type="text" class="form-control" value="<?php if (!empty($name)) echo $name;?>">
+  </div>
+  
+  <div class="mb-3">
+    <label for="value" class="form-label">Размер, %</label>
+    <input id="value" name="value" type="text" class="form-control" value="<?php if (!empty($value)) echo $value;?>">
+  </div>
+  
+  <div class="mb-3">
+    <label for="start" class="form-label">Дата начала</label>
+    <input id="start" name="start" type="text" class="form-control datepicker_air" value="<?php if (!empty($start)) echo $start; else echo date('Y.m.d');?>">
+  </div>
+  
+  <div class="mb-3">
+    <label for="stop" class="form-label">Дата окончания</label>
+    <input id="stop" name="stop" type="text" class="form-control datepicker_air" value="<?php if (!empty($stop)) echo $stop; else echo date('Y.m.d');?>">
+  </div>
 
-		<tr>
-			<td>Наименование акции/скидки</td>
-			<td>
-				<input id="name" name="name" type="text" value="<?php if (!empty($name)) echo $name;?>">
-			</td>
-		</tr>
+  <input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
 
-		<tr>
-			<td>Размер, %</td>
-			<td>
-				<input id="value" name="value" type="text" value="<?php if (!empty($value)) echo $value;?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Дата начала</td>
-			<td>
-				<input id="start" name="start" class="datepicker_air" type="text" value="<?php if (!empty($start)) echo $start; else echo date('Y.m.d');?>">
-			</td>
-		</tr>
-
-		<tr>
-			<td>Дата окончания</td>
-			<td>
-				<input id="stop" name="stop" class="datepicker_air" type="text" value="<?php if (!empty($stop)) echo $stop; else echo date('Y.m.d');?>">
-			</td>
-		</tr>
-
-
-
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
-
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
-
+  <div class="mb-3">
+    <button id="btn_reset" type="button" class="btn btn-secondary" onclick="btn_reset_click();">Очистить поля</button>
+    <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-primary">Сохранить</button>
+  </div>
 </form>
+
+			</div>
+		</div>
+	</div>
+</section>
+
 <?php
 	}; // if (admin)
 ?>
 
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>
