@@ -56,10 +56,6 @@ $table = 'products';
             `$table`.`descr`,
             `categories`.`name` AS `category`,
             `$table`.`price`,
-            `$table`.`weight`,
-            `$table`.`length`,
-            `$table`.`width`,
-            `$table`.`height`,
             `$table`.`amount`- IFNULL(ROUND(SUM(`items`.`amount`)),0) AS 'amount',
     #       `$table`.`amount`,
             `discounts`.`value` AS `discount_value`,
@@ -97,7 +93,7 @@ $table = 'products';
                     $ind = ($i - 1) * $in_row + $j - 1;
                     if (isset($a[$ind])) {
                         $row = $a[$ind];
-                        $fname = 'images/' . $row['id'] . '.jpg';
+                        $fname = 'upload/' . $row['id'] . '.jpg';
                         if (!file_exists($fname)) { // если нет файла, показать "НЕТ ФОТО"
                             $fname = 'images/stock-goods.webp';
                         };
