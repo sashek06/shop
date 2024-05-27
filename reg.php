@@ -9,7 +9,7 @@
 	<section class="reg d-flex align-items-center" style="min-height: 100vh;">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-8">
+				<div class="col-4">
 				<form name="form" action="reg.php" method="post">
         <?php
             header('Content-type: text/html; charset=utf-8');
@@ -68,26 +68,26 @@
                 echo '<p class="text-danger">Введите ФИО, логин и пароль!</p>';
             }
         ?>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="surname" class="form-label">Фамилия</label>
             <input type="text" class="form-control" id="surname" name="surname" pattern="[A-Za-zА-Яа-яЁё]{1,}" value="<?php if (!empty($surname)) echo $surname;?>" required>
-        </div>
+        </div> -->
         <div class="mb-3">
             <label for="name" class="form-label">Имя</label>
             <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-zА-Яа-я]{1,}" value="<?php if (!empty($name)) echo $name;?>" required>
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="middlename" class="form-label">Отчество</label>
             <input type="text" class="form-control" id="middlename" name="middlename" pattern="[A-Za-zА-Яа-я]{1,}" value="<?php if (!empty($middlename)) echo $middlename;?>">
-        </div>
-        <div class="mb-3">
+        </div> -->
+        <!-- <div class="mb-3">
             <label for="address" class="form-label">Адрес</label>
             <input type="text" class="form-control" id="address" name="address" pattern="[A-Za-zА-Яа-я0-9 ,.]+" value="<?php if (!empty($address)) echo $address;?>">
-        </div>
-        <div class="mb-3">
+        </div> -->
+        <!-- <div class="mb-3">
             <label for="phone" class="form-label">Телефон</label>
             <input type="text" class="form-control" id="phone" name="phone" pattern="\d+" value="<?php if (!empty($phone)) echo $phone;?>" required>
-        </div>
+        </div> -->
         <div class="mb-3">
             <label for="login" class="form-label">Логин</label>
             <input type="text" class="form-control" id="login" name="login" value="<?php if (!empty($login)) echo $login;?>" required>

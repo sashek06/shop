@@ -47,8 +47,8 @@
 <section class="product-table">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class=" col-12 h1 mt-5 text-center""><?php echo $title;?></div>
-			<div class="col-12">
+			<div class="col-12 h1 mt-5 text-center""><?php echo $title;?></div>
+			<div class="col-12 overflow-scroll">
 			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {

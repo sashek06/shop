@@ -45,7 +45,7 @@
 	<div class="container">
 		<div class="row justify-content-center my-5">
 			<div class="col-md-8 h1 text-center"><?php echo $title;?></div>
-			<div class="col-md-12">
+			<div class="col-12 overflow-scroll">
 			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
