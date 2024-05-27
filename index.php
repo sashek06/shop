@@ -1,19 +1,88 @@
 <?php
 /*
-	Главная страница
-	*/
+    Главная страница
+    */
 header('Content-type: text/html; charset=utf-8');
 error_reporting(E_ALL);
 include('auth.php');
 include "func.php";
 include "scripts.php";
-?>
+$con = connect();
+$title = 'Главная';
 
+?>
 
 <head>
     <meta charset="utf-8">
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            /* Темный фон для всего сайта */
+            color: #f8f9fa;
+            /* Светлый цвет текста */
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #282828;
+            /* Темный фон для заголовка */
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 24px;
+            color: #ccc;
+            /* Более светлый текст для описания */
+        }
+
+        .main__card {
+            transition: transform 0.5s ease-in-out;
+            transform-origin: center top;
+            background-color: #333;
+            /* Темный фон для карточек */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            /* Тени для карточек */
+            margin-bottom: 30px;
+        }
+
+        .main__card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            /* Более сильные тени при наведении */
+        }
+
+        .main__card h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #f8f9fa;
+        }
+
+        .main__card p {
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .categories {
+            padding: 20px 0;
+            background-color: #1a1a1a;
+        }
+    </style>
 </head>
 
 <?php
@@ -21,42 +90,41 @@ include('showcase.php');
 include('menu.php');
 ?>
 
-<div class="container d-flex align-items-center h-100">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="gear.php" class="text-decoration-none text-body" style="display: inline-block;">
-                    <img class="d-block mx-auto mb-4" src="images/raids.webp" alt="Снаряжение" width="200" height="200" style="border-radius: 30%;">
-                    <h1 class="display-6">PvE</h1>
-                    <p class="lead mb-4">Максимальный прогресс в PVE за минимальное время.</p>
-                </a>
-            </div>
-            <style>
-                .main__card:hover {
-                    transform: translateY(-10px) scale(1.1);
-                }
-            </style>
-        </div>
-        <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="rep.php" class="text-decoration-none text-body">
-                    <img class="d-block mx-auto mb-4" src="images/pvp.webp" alt="Репутация" width="200" height="200" style="border-radius: 30%;">
-                    <h1 class="display-6">PvP</h1>
-                    <p class="lead mb-4">Повышайте рейтинг в PVP с нашей помощью!</p>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="px-4 py-5 my-5 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="achiv.php" class="text-decoration-none text-body">
-                    <img class="d-block mx-auto mb-4" src="images/gold.webp" alt="Достижения" width="200" height="200" style="border-radius: 30%;">
-                    <h1 class="display-6">Золото</h1>
-                    <p class="lead mb-4">Больше золота – больше возможностей в игре."</p>
-                </a>
-            </div>
+<div class="header">
+    <h1>Добро пожаловать на наш Boost-WoW сервис!</h1>
+    <p>Мы предлагаем лучшие услуги по прокачке и улучшению вашего игрового персонажа.</p>
+</div>
+
+<section class="categories">
+    <div class="container">
+        <div class="row">
+            <?php
+            // Запрос для получения категорий
+            $query = "SELECT id, name, descr FROM categories WHERE id <> 0 ORDER BY name";
+            $result = mysqli_query($con, $query) or die(mysqli_error($con));
+
+            // Проход по результатам и вывод каждой категории
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '
+            <div class="col-md-4">
+                <div class="px-2 py-2 text-center main__card">
+                    <a href="view.php?cat_id=' . $row['id'] . '" class="text-decoration-none text-body" style="display: inline-block;">
+                        <h1 class="display-6">' . $row['name'] . '</h1>
+                        <p class="lead mb-4">' . $row['descr'] . '</p>
+                    </a>
+                </div>
+            </div>';
+            }
+            ?>
         </div>
     </div>
-</div>
+</section>
+
+<section class="main d-flex flex-column justify-content-center" style="min-height: 100vh;">
+    <div class="container">
+        <!-- Здесь можно добавить дополнительный контент -->
+    </div>
+</section>
 
 <?php
 include('footer.php');

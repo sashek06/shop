@@ -145,46 +145,25 @@ if (!in_array($_SESSION['level'], array(10, 2, 1))) { // доступ разре
 	</script>
 </head>
 
-<html data-bs-theme="dark">
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
+<?php
+    include('showcase.php');
+    include('menu.php');
+?>
 
-	<tr>
-		<!-- меню -->
-		<td width="300px" style="vertical-align:top">
-			<?php
-				include('menu.php');
-				include('showcase.php');
-			?>
-		</td>
+<section class="cart mt-5" style="min-height: 100vh;">
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="h1 text-center"><?php echo $title;?></div>
+			<div id="cart" width="100%"></div>
+			<div class="order__button mt-4">
+				<button class="btn btn-primary btn-block" onclick="do_order()">Оформить заказ</button>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
 
-		<!-- контент -->
-		<td style="vertical-align:top; width:900px">
-
-<h1><?php echo $title;?></h1>
-		<div id="cart" width="100%"></div>
-		<button onclick="do_order()"><input type=image src="images/ok.gif">Оформить заказ</button>
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

@@ -18,7 +18,7 @@
 	$title='Категории';
 	$table='categories';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -30,30 +30,17 @@
 </script>
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="40%" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td class="content">
-
-<h1><?php echo $title;?></h1>
 <?php
+    include('showcase.php');
+    include('menu.php');
+?>
+
+<section class="categories">
+	<div class="container">
+		<div class="h1 col-12 text-center mt-5"><?php echo $title;?></div>
+		<div class="row justify-content-center my-5">
+			<div class="col-md-12">
+			<?php
 	// если надо удалить
 	if (!empty($_GET['delete_id'])) {
 		$id=intval($_GET['delete_id']);
@@ -163,83 +150,53 @@
 
 	echo SQLResultTable($query, $con, '');
 ?>
-
+			</div>
 <?php
-	// доступ к редактированию только админу
-	if ($edit) { // if (admin)
+// доступ к редактированию только админу
+if ($edit) { // if (admin)
 ?>
-<form name="form" action="<?php echo $table?>.php" method="post">
-	<table>
-		<tr>
-			<th colspan="2">
-				<p>Редактор <?php if (!empty($id)) echo "(редактируется строка с кодом $id)";?></p>
-			</th>
-		</tr>
-
-		<tr>
-			<td>Наименование</td>
-			<td>
-				<textarea id="name" name="name" type="textarea"><?php if (!empty($name)) echo $name;?></textarea>
-			</td>
-		</tr>
-
-		<tr>
-			<td>Описание</td>
-			<td>
-				<textarea id="descr" name="descr" type="textarea"><?php if (!empty($descr)) echo $descr;?></textarea>
-			</td>
-		</tr>
-
-		<tr>
-			<td>Категория</td>
-			<td>
-				<select id="parent" name="parent">
-					<?php
-						$query="
-							SELECT `descr`, `name`, `id`, `parent`
-							FROM `categories`
-							ORDER BY `name`
-						";
-						$res=mysqli_query($con, $query) or die(mysqli_error($con));
-						while ($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-							$selected= ($parent==$row['id']) ? 'selected' : '';
-							echo "
-								<option value='$row[id]' $selected>$row[name]</option>
-							";
-						};
-					?>
-				</select>
-			</td>
-		</tr>
-
-	<input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id;?>">
-
-	<tr>
-		<td colspan='2'>
-			<button id="btn_reset" onclick="btn_reset_click();">Очистить поля</button>
-			<button id="btn_submit" name="btn_submit" type="submit">Сохранить</button>
-		</td>
-	</tr>
-	</table>
-
+			<div class="col-md-8">
+				<form name="form" action="<?php echo $table?>.php" method="post" class="my-5">
+  <div class="mb-3">
+    <label for="name" class="form-label">Наименование</label>
+    <textarea id="name" name="name" class="form-control"><?php if (!empty($name)) echo $name; ?></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="descr" class="form-label">Описание</label>
+    <textarea id="descr" name="descr" class="form-control"><?php if (!empty($descr)) echo $descr; ?></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="parent" class="form-label">Категория</label>
+    <select id="parent" name="parent" class="form-select">
+      <?php
+        $query = "
+          SELECT `descr`, `name`, `id`, `parent`
+          FROM `categories`
+          ORDER BY `name`
+        ";
+        $res = mysqli_query($con, $query) or die(mysqli_error($con));
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+          $selected = ($parent == $row['id']) ? 'selected' : '';
+          echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
+        }
+      ?>
+    </select>
+  </div>
+  <input name="hidden_edit_id" type="hidden" value="<?php if (!empty($id)) echo $id; ?>">
+  <div class="d-flex justify-content-between">
+    <button id="btn_reset" onclick="btn_reset_click();" type="button" class="btn btn-secondary">Очистить поля</button>
+    <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-primary">Сохранить</button>
+  </div>
 </form>
+			</div>
+		</div>
+	</div>
+</section>
+
 <?php
 	}; // if (admin)
 ?>
 
-		</td>
-	</tr>
-
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>

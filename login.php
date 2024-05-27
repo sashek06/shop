@@ -50,9 +50,7 @@
     include('menu.php');
 ?>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-
-<section class="login__form d-flex align-items-center h-100">
+<section class="login__form d-flex align-items-center" style="min-height: 100vh;">
 	<div class="container">
 		<div class="row justify-content-center">
 			<form id="loginForm" method="post" class="col-4">
