@@ -25,44 +25,23 @@
     <div class="title h1 text-center">Добро пожаловать на наш Boost-WoW сервис!</div>
     <div class="title h3 text-body-secondary text-center mt-2 mb-5">Мы предлагаем лучшие услуги по прокачке и улучшению вашего игрового персонажа.</div>
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="gear.php" class="text-decoration-none text-body" style="display: inline-block;">
-                    <!-- <img class="d-block mx-auto mb-4" src="images/raids.webp" alt="Снаряжение" width="200" height="200" style="border-radius: 30%;"> -->
-                    <h1 class="display-6">PvE</h1>
-                    <p class="lead mb-4">Максимальный прогресс в PVE за минимальное время.</p>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="rep.php" class="text-decoration-none text-body">
-                    <!-- <img class="d-block mx-auto mb-4" src="images/pvp.webp" alt="Репутация" width="200" height="200" style="border-radius: 30%;"> -->
-                    <h1 class="display-6">PvP</h1>
-                    <p class="lead mb-4">Повышайте рейтинг в PVP с нашей помощью!</p>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="px-2 py-2 text-center main__card" style="transition: transform 0.5s ease-in-out; transform-origin: center top;">
-                <a href="achiv.php" class="text-decoration-none text-body">
-                    <!-- <img class="d-block mx-auto mb-4" src="images/gold.webp" alt="Достижения" width="200" height="200" style="border-radius: 30%;"> -->
-                    <h1 class="display-6">Золото</h1>
-                    <p class="lead mb-4">Больше золота – больше возможностей в игре."</p>
-                </a>
-            </div>
-        </div>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">
+        <?php
+            // Запрос для получения категорий
+            $query = "SELECT id, name, descr FROM categories WHERE id <> 0 ORDER BY name";
+            $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
-            </button>
-            <button type="button" class="btn btn-primary">
-
-            </button>
-            <button type="button" class="btn btn-primary">
-
-            </button>
-        </div>
+            // Проход по результатам и вывод каждой категории
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '
+                <button type="button" class="btn btn-primary">
+                <a href="view.php?cat_id=' . $row['id'] . '" class="text-decoration-none text-body" style="display: inline-block;">
+                    <div class="h3 mb-0 py-4">' . $row['name'] . '</div>
+                </a>
+                </button>';
+            }
+            ?>
+            </div>
     </div>
 </div>
 </section>
