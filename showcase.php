@@ -20,10 +20,10 @@ $query = "
 
 echo '
 <html data-bs-theme="dark">
-<body class="d-flex flex-column h-100">
+<body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="index.php">
       <img src="images/controller.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
       WoWBoost
     </a>
@@ -37,7 +37,28 @@ echo '
 
 $res = mysqli_query($con, $query) or die(mysqli_error($con));
 while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-    echo '<li><a class="dropdown-item" id="cats_style" href="view.php?cat_id=' . $row['cat_id'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
+  $sub_query = "
+        SELECT
+            `name`, `id` AS `sub_cat_id`
+        FROM
+            `categories`
+        WHERE
+            `categories`.`parent` = " . $row['cat_id'] . "
+    ";
+  $sub_res = mysqli_query($con, $sub_query) or die(mysqli_error($con));
+
+  // Если есть подкатегории
+  if (mysqli_num_rows($sub_res) > 0) {
+    echo '<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="view.php?cat_id=' . $row['cat_id'] . '">' . htmlspecialchars($row['name']) . '</a>';
+    echo '<ul class="dropdown-menu">';
+    while ($sub_row = mysqli_fetch_array($sub_res, MYSQLI_ASSOC)) {
+      echo '<li><a class="dropdown-item" href="view.php?cat_id=' . $sub_row['sub_cat_id'] . '">' . htmlspecialchars($sub_row['name']) . '</a></li>';
+    }
+    echo '</ul></li>';
+  } else {
+    // Если нет подкатегорий
+    echo '<li><a class="dropdown-item" href="view.php?cat_id=' . $row['cat_id'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
+  }
 }
 
 echo '
@@ -47,3 +68,36 @@ echo '
 
 echo $showcase;
 ?>
+
+<style>
+  .dropdown-submenu {
+    position: relative;
+  }
+
+  .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdowns = document.querySelectorAll('.dropdown-submenu');
+    dropdowns.forEach(function(dropdown) {
+      dropdown.addEventListener('mouseenter', function() {
+        var submenu = this.querySelector('.dropdown-menu');
+        if (submenu) {
+          submenu.classList.add('show');
+        }
+      });
+
+      dropdown.addEventListener('mouseleave', function() {
+        var submenu = this.querySelector('.dropdown-menu');
+        if (submenu) {
+          submenu.classList.remove('show');
+        }
+      });
+    });
+  });
+</script>

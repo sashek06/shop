@@ -19,7 +19,7 @@
 	$title="Товары со свободным остатком &leq;$free_remains";
 	$table='products';
 ?>
-<html data-bs-theme="dark">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
@@ -38,27 +38,10 @@
 
 </head>
 
-<body>
-<table id="main_table">
-	<!-- баннер -->
-	<tr>
-		<td colspan=2 style="text-align:center">
-			<?php
-				include('top.php');
-			?>
-		</td>
-	</tr>
-
-	<tr>
-		<!-- меню -->
-		<td width="300px" class="menu2">
-			<?php
-				include('menu.php');
-			?>
-		</td>
-
-		<!-- контент -->
-		<td width="900px" class="content">
+<?php
+    include('showcase.php');
+    include('menu.php');
+?>
 
 <h1><?php echo $title;?></h1>
 <?php
@@ -90,19 +73,7 @@
 
 	echo SQLResultTable($query, $con, '');
 ?>
-		</td>
-	</tr>
 
-	<!-- подвал -->
-	<tr>
-		<td colspan=2>
-			<?php
-				include('footer.php');
-			?>
-		</td>
-	</tr>
-
-</table>
-
-</body>
-</html>
+<?php
+    include('footer.php');
+?>
