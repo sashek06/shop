@@ -25,10 +25,7 @@
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="orders.php">Заказы</a> </li>';
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="items.php">Содержимое заказов</a> </li>';
 		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="report_products.php">Малые остатки</a> </li>';
-		if ( in_array($_SESSION['level'], array(10)) ) $menu.='
-					</ul>
-					</li>
-					';
+		if ( in_array($_SESSION['level'], array(10)) ) $menu.='</ul></li>';
 	};
 
 	if ( !isset($_SESSION['level'])) $menu.='<li class="nav-item">
