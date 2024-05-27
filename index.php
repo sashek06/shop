@@ -1,23 +1,24 @@
 <?php
-	/*
+/*
 	Главная страница
 	*/
-	header('Content-type: text/html; charset=utf-8');
-	error_reporting(E_ALL);
-	include('auth.php');
-	include('func.php');
-	$title='Главная';
+header('Content-type: text/html; charset=utf-8');
+error_reporting(E_ALL);
+include('auth.php');
+include "func.php";
+include "scripts.php";
 ?>
 
+
 <head>
-	<meta charset="utf-8">
-	<title><?php echo $title;?></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <?php
-    include('showcase.php');
-    include('menu.php');
+include('showcase.php');
+include('menu.php');
 ?>
 
 <div class="container d-flex align-items-center h-100">
@@ -58,5 +59,5 @@
 </div>
 
 <?php
-    include('footer.php');
+include('footer.php');
 ?>

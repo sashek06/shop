@@ -1,20 +1,20 @@
 <?php
-	$menu= '
+$menu = '
 	';
 
-	// $menu.='<h2><a href="index.php"><img src="images/home.png" width="20px">Главная</a> </h2>';
-	// $menu.='<h2><a href="view.php"><img src="images/showcase.png" height="18px">Витрина</a></h2>';
-	// $menu.='<h2><a href="contacts.php"><img src="images/mail.png" width="20px">Реквизиты</a> </h2>';
-	// $menu.='<h2><a href="about.php"><img src="images/about.png" width="20px">О нас</a> </h2>';
+// $menu.='<h2><a href="index.php"><img src="images/home.png" width="20px">Главная</a> </h2>';
+// $menu.='<h2><a href="view.php"><img src="images/showcase.png" height="18px">Витрина</a></h2>';
+// $menu.='<h2><a href="contacts.php"><img src="images/mail.png" width="20px">Реквизиты</a> </h2>';
+// $menu.='<h2><a href="about.php"><img src="images/about.png" width="20px">О нас</a> </h2>';
 
-	$menu.='<li class="nav-item">
+$menu .= '<li class="nav-item">
 	<a class="nav-link" href="index.php">Главная</a>
 	</li>';
 
-	if ( !isset($_SESSION['level'])) $menu.='<li class="nav-item">
+if (!isset($_SESSION['level'])) $menu .= '<li class="nav-item">
 	<a class="nav-link" href="login.php">Авторизация</a>
 	</li>';
-	if ( !isset($_SESSION['level'])) $menu.='<li class="nav-item">
+if (!isset($_SESSION['level'])) $menu .= '<li class="nav-item">
 	<a class="nav-link" href="reg.php">Регистрация</a>
 	</li></ul>
 	</div>
@@ -35,26 +35,26 @@
 	}; */
 
 // меню по уровням доступа: 10 - админ и т.д.
-	if (isset($_SESSION['level'])) {
-		if ( in_array($_SESSION['level'], array(10)) ) $menu.='<li class="nav-item dropdown">
+if (isset($_SESSION['level'])) {
+	if (in_array($_SESSION['level'], array(10))) $menu .= '<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 			Администрирование
 		</a>
 		<ul class="dropdown-menu beads">';
-		if ( in_array($_SESSION['level'], array(10)) ) $menu.='<li> <a class="dropdown-item" href="users.php">Пользователи</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="categories.php">Категории</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="products.php">Товары</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="discounts.php">Акции и скидки</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="orders.php">Заказы</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="items.php">Содержимое заказов</a> </li>';
-		if ( in_array($_SESSION['level'], array(10,2)) ) $menu.='<li> <a class="dropdown-item" href="report_products.php">Малые остатки</a> </li>';
-		if ( in_array($_SESSION['level'], array(10)) ) $menu.='
+	if (in_array($_SESSION['level'], array(10))) $menu .= '<li> <a class="dropdown-item" href="users.php">Пользователи</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="categories.php">Категории</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="products.php">Товары</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="discounts.php">Акции и скидки</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="orders.php">Заказы</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="items.php">Содержимое заказов</a> </li>';
+	if (in_array($_SESSION['level'], array(10, 2))) $menu .= '<li> <a class="dropdown-item" href="report_products.php">Малые остатки</a> </li>';
+	if (in_array($_SESSION['level'], array(10))) $menu .= '
 					</ul>
 					</ul>
 				</div>
 	  		</div>
 		</nav>';
-	};
+};
 
 /* 	// меню по уровням доступа: 10 - админ и т.д.
 	if (isset($_SESSION['level'])) {
@@ -69,5 +69,4 @@
 		if ( in_array($_SESSION['level'], array(10)) ) $menu.='</ul><hr>';
 	}; */
 
-	echo $menu;
-?>
+echo $menu;
