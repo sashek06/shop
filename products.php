@@ -44,15 +44,15 @@ include('menu.php');
 
 <table id="main_table">
 
-	<section class="product-table">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class=" col-12 h1 mt-5 text-center""><?php echo $title; ?></div>
-			<div class=" col-12">
-					<?php
-					// если надо удалить
-					if (!empty($_GET['delete_id'])) {
-						$id = intval($_GET['delete_id']);
+<section class="product-table">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 h1 mt-5 text-center""><?php echo $title;?></div>
+			<div class="col-12 overflow-scroll">
+			<?php
+	// если надо удалить
+	if (!empty($_GET['delete_id'])) {
+		$id=intval($_GET['delete_id']);
 
 						// каскадное удаление из содержимого заказов
 						$query = "
