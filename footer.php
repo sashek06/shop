@@ -32,4 +32,3 @@ echo '
 </body>
 </html>
 ';
-?>
